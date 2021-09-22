@@ -65,7 +65,7 @@ The `useEffect$` hook receives a function that returns an observable, subscribes
 ```ts
 import { useEffect$ } from '@ngneat/react-rxjs';
 
-function fetchTodo() {
+function loadTodos() {
   return fromFetch('todos').pipe(tap({
     next(todos) {
       updateStore(todos);
@@ -76,7 +76,7 @@ function fetchTodo() {
 function TodosComponent() {
   const [todos] = useObservable(todos$);
 
-  useEffect$(() => fetchTodo());
+  useEffect$(() => loadTodos());
 
   return <>{todos}</>;
 }
