@@ -6,7 +6,7 @@
     "test": "nx run-many --target=test --exclude=playground --all",
     "lint": "nx run-many --target=lint --exclude=playground --all",
     "build": "nx build react-rxjs",
-    "cz": "cz",
+    "c": "cz",
     "prepare": "husky install"
   },
   "private": true,

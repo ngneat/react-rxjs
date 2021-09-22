@@ -20,7 +20,7 @@ describe('useObservable', () => {
     });
 
     it('should update every second', () => {
-        const { result } = renderHook(() => useObservable(interval(1000), 0));
+        const { result } = renderHook(() => useObservable(interval(1000), { initialValue: 0 }));
         let [next] = result.current;
 
         expect(next).toBe(0);
@@ -45,7 +45,7 @@ describe('useObservable', () => {
     it('should return an error', () => {
         const { result } = renderHook(() => useObservable(of(1).pipe(map(error => {
             throw new Error('error');
-        })), 0));
+        })), { initialValue: 0 }));
 
         const [next, { error, completed }] = result.current;
 
@@ -57,7 +57,7 @@ describe('useObservable', () => {
     it('should unsubscribe', () => {
         const spy = jest.fn();
 
-        const { result, unmount } = renderHook(() => useObservable(interval(1000).pipe(finalize(spy)), 0));
+        const { result, unmount } = renderHook(() => useObservable(interval(1000).pipe(finalize(spy)), { initialValue: 0 }));
 
         // eslint-disable-next-line prefer-const
         let [next] = result.current;
