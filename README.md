@@ -1,5 +1,3 @@
-# React RxJS
-
 <p align="center">
  <img width="20%" height="20%" src="logo.png">
 </p>
