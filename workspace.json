@@ -1,7 +1,160 @@
 {
   "version": 2,
-  "projects": {},
+  "projects": {
+    "playground": {
+      "root": "packages/playground",
+      "sourceRoot": "packages/playground/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/packages/playground",
+            "index": "packages/playground/src/index.html",
+            "main": "packages/playground/src/main.tsx",
+            "polyfills": "packages/playground/src/polyfills.ts",
+            "tsConfig": "packages/playground/tsconfig.app.json",
+            "assets": [
+              "packages/playground/src/favicon.ico",
+              "packages/playground/src/assets"
+            ],
+            "styles": [
+              "packages/playground/src/styles.scss"
+            ],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "packages/playground/src/environments/environment.ts",
+                  "with": "packages/playground/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "playground:build",
+            "hmr": true,
+            "port": 4201
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "playground:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "packages/playground/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version"
+        }
+      }
+    },
+    "react-rxjs": {
+      "root": "packages/react-rxjs",
+      "sourceRoot": "packages/react-rxjs/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/packages/react-rxjs",
+            "tsConfig": "packages/react-rxjs/tsconfig.lib.json",
+            "project": "packages/react-rxjs/package.json",
+            "entryFile": "packages/react-rxjs/src/index.ts",
+            "external": [
+              "react/jsx-runtime"
+            ],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "packages/react-rxjs/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/packages/react-rxjs"
+          ],
+          "options": {
+            "jestConfig": "packages/react-rxjs/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "version": {
+          "executor": "@jscutlery/semver:version"
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "playground"
 }

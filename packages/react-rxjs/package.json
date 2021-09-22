@@ -1,0 +1,26 @@
+{
+  "name": "@ngneat/react-rxjs",
+  "version": "2.0.0",
+  "description": "React goodies for applications that uses RxJS",
+  "repository": {
+    "url": "https://github.com/ngneat/react-rxjs"
+  },
+  "readme": "https://github.com/ngneat/react-rxjs/blob/master/README.md",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "rxjs",
+    "react",
+    "react hooks",
+    "observable hook",
+    "until destroyed hook",
+    "effects",
+    "react rxjs"
+  ],
+  "author": {
+    "name": "Netanel Basal",
+    "url": "https://netbasal.com"
+  },
+  "license": "MIT"
+}

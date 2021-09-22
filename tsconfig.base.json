@@ -7,14 +7,17 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
+    "importHelpers": false,
+    "target": "ES2017",
     "module": "esnext",
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strict": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ngneat/react-rxjs": ["packages/react-rxjs/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
