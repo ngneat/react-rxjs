@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "nx serve playground",
     "test": "nx run-many --target=test --exclude=playground --all",
     "lint": "nx run-many --target=lint --exclude=playground --all",
     "build": "nx build react-rxjs",

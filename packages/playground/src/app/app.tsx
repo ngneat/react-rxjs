@@ -38,14 +38,15 @@ const counter$ = interval(2000);
 
 export function App() {
   const [show, setShow] = useState(true);
-
+  const [sideEffect, setSideEffect] = useState(1)
   const [count] = useObservable(counter$, { initialValue: 0 });
 
-  useEffect$(() => loadTodos());
+  useEffect$(() => loadTodos(), [sideEffect]);
 
   return (
     <section>
       {count}
+      <button onClick={() => setSideEffect(e => e + 1)}>sideEffect</button>
       <button onClick={() => setShow(show => !show)}>Toggle</button>
       {show && <SearchComponent />}
     </section>
