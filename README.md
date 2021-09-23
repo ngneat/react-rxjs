@@ -83,8 +83,7 @@ function TodosComponent() {
 ```
 
 ## useComponentEffects
-To use an effect we first need to create it by using the `createEffect` function.
-This function takes a callback function which is passed an `Observable` parameter and returns an `Observable`. Every time the `effect` is called, the value is pushed into that `Observable`.
+To use an effect we first need to create it by using the `createEffect` function:
 
 ```ts
 import { createEffect } from '@ngneat/react-rxjs';
@@ -97,7 +96,7 @@ export const searchTodoEffect = createEffect((searchTerm$: Observable<string>) =
 });
 ```
 
-Now we can register it in our component, and call it when we need:
+This function takes a callback function which is passed an `Observable` parameter and returns an `Observable`. Every time the `effect` is called, the value is pushed into that `Observable`. Now we can register it in our component, and call it when we need:
 
 ```ts
 import { useComponentEffects$ } from '@ngneat/react-rxjs';
@@ -109,7 +108,7 @@ function SearchComponent() {
 }
 ```
 
-We can pass multiple effects.
+We can pass multiple effects to `useComponentEffects`.
 
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
