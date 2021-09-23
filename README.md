@@ -117,7 +117,9 @@ We can also register multiple effects:
 
 ```ts
 function FooComponent() {
-  const [addTodo, updateTodo, deleteTodo] = useComponentEffects([addTodoEffect, updateTodoEffect, deleteTodoEffect]);
+  const [addTodo, updateTodo, deleteTodo] = useComponentEffects([
+    addTodoEffect, updateTodoEffect, deleteTodoEffect
+  ]);
 
   return ...
 }
