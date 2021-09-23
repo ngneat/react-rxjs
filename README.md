@@ -96,7 +96,7 @@ export const searchTodoEffect = createEffect((searchTerm$: Observable<string>) =
 });
 ```
 
-This function takes a callback function which is passed an `Observable` parameter and returns an `Observable`. Every time the `effect` is called, the value is pushed into that `Observable`. Now we can register it in our component, and call it when we need:
+This function takes a callback function which is passed an `Observable` parameter and returns an `Observable`. Now we can register it in our component, and call it when we need:
 
 ```ts
 import { useComponentEffects$ } from '@ngneat/react-rxjs';
@@ -107,8 +107,7 @@ function SearchComponent() {
   return <input onChange={({ target: { value } }) => searchTodo(value)} />
 }
 ```
-
-We can pass multiple effects to `useComponentEffects`.
+Every time the `effect` is called, the value is pushed into that `Observable`. We can pass multiple effects to `useComponentEffects`.
 
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
