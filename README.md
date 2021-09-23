@@ -83,7 +83,8 @@ function TodosComponent() {
 ```
 
 ## useComponentEffects
-To use an effect we first need to create it by using the `createEffect` function:
+To use an effect we first need to create it by using the `createEffect` function.
+This function takes a callback function which is passed an `Observable` parameter and returns an `Observable`. Every time the `effect` is called, the value is pushed into that `Observable`.
 
 ```ts
 import { createEffect } from '@ngneat/react-rxjs';
