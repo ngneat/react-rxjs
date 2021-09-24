@@ -125,5 +125,29 @@ function FooComponent() {
 }
 ```
 
+## useFromEvent
+It's the `fromEvent` observable, but with hooks:
+
+```ts
+export function App() {
+  const [text, setText] = useState('');
+
+  const { ref } = useFromEvent<ChangeEvent<HTMLInputElement>>('keyup', (event$) =>
+    event$.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      tap((event) => setText(event.target.value))
+    )
+  );
+
+  return (
+    <>
+     <input ref={ref}>
+     { text }
+    </>
+  )
+```
+
+
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
