@@ -2,7 +2,7 @@ import { createEffect, useComponentEffects, useEffect$, useFromEvent, useObserva
 import { interval, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { fromFetch } from 'rxjs/fetch';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const searchTodoEffect = createEffect((searchTerm$: Observable<string>) => {
   return searchTerm$.pipe(
