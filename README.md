@@ -77,54 +77,11 @@ function TodosComponent() {
   const [todos] = useObservable(todos$);
 
   useEffect$(() => loadTodos());
+  useEffect$(() => loadTodos(), deps);
 
   return <>{todos}</>;
 }
 ```
-
-## useComponentEffects
-To use an `effect` we first need to create it by using the `createEffect` function:
-
-```ts
-import { createEffect } from '@ngneat/react-rxjs';
-
-export const searchTodoEffect = createEffect((searchTerm$: Observable<string>) => {
-  return searchTerm$.pipe(
-    debounceTime(300),
-    switchMap((searchTerm) => fetchTodos({ searchTerm })),
-  );
-});
-```
-
-The `createEffect` function takes a `callback` function which is passed an `Observable` parameter and returns an `Observable`.
-
-Now we can register the effect in our component, and call it when we need:
-
-```ts
-import { useComponentEffects$ } from '@ngneat/react-rxjs';
-
-function SearchComponent() {
-  const searchTodo = useComponentEffects(searchTodoEffect);
-
-  return <input onChange={({ target: { value } }) => searchTodo(value)} />
-}
-```
-
-Every time the `effect` is called, its value is pushed into that `Observable`.
-
-
-We can also register multiple effects:
-
-```ts
-function FooComponent() {
-  const [addTodo, updateTodo, deleteTodo] = useComponentEffects([
-    addTodoEffect, updateTodoEffect, deleteTodoEffect
-  ]);
-
-  return ...
-}
-```
-
 ## useFromEvent
 It's the `fromEvent` observable, but with hooks:
 

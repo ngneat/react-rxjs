@@ -1,25 +1,8 @@
-import { createEffect, useComponentEffects, useEffect$, useFromEvent, useObservable } from '@ngneat/react-rxjs';
-import { interval, Observable } from 'rxjs';
+import { useEffect$, useFromEvent, useObservable } from '@ngneat/react-rxjs';
+import { interval } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { fromFetch } from 'rxjs/fetch';
 import { ChangeEvent, useState } from 'react';
-
-const searchTodoEffect = createEffect((searchTerm$: Observable<string>) => {
-  return searchTerm$.pipe(
-    debounceTime(300),
-    tap({
-      next(v) {
-        console.log(v);
-      }
-    })
-  );
-});
-
-function SearchComponent() {
-  const searchTodo = useComponentEffects(searchTodoEffect);
-
-  return <input onChange={({ target: { value } }) => searchTodo(value)} />
-}
 
 function loadTodos() {
   return fromFetch<{ id: number }[]>('https://jsonplaceholder.typicode.com/todos', {
@@ -59,7 +42,6 @@ export function App() {
       {count}
       <button onClick={() => setSideEffect(e => e + 1)}>sideEffect</button>
       <button onClick={() => setShow(show => !show)}>Toggle</button>
-      {show && <SearchComponent />}
 
       <h1>useFromEvent</h1>
       <h3>{text}</h3>
