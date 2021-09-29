@@ -7,7 +7,7 @@
     "test": "nx run-many --target=test --exclude=playground --all",
     "lint": "nx run-many --target=lint --exclude=playground --all",
     "build": "nx build react-rxjs",
-    "c": "cz",
+    "c": "git-cz",
     "prepare": "husky install"
   },
   "private": true,
@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "git-cz": "^4.7.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "regenerator-runtime": "0.13.7",
@@ -57,7 +58,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "git-cz"
     }
   },
   "commitlint": {
