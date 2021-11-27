@@ -8,9 +8,7 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/packages/playground",
             "index": "packages/playground/src/index.html",
@@ -21,9 +19,7 @@
               "packages/playground/src/favicon.ico",
               "packages/playground/src/assets"
             ],
-            "styles": [
-              "packages/playground/src/styles.scss"
-            ],
+            "styles": ["packages/playground/src/styles.scss"],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -68,19 +64,16 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "packages/playground/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["packages/playground/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "version": {
           "executor": "@jscutlery/semver:version"
         }
-      }
+      },
+      "tags": []
     },
     "react-rxjs": {
       "root": "packages/react-rxjs",
@@ -89,17 +82,13 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:package",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/packages/react-rxjs",
             "tsConfig": "packages/react-rxjs/tsconfig.lib.json",
             "project": "packages/react-rxjs/package.json",
             "entryFile": "packages/react-rxjs/src/index.ts",
-            "external": [
-              "react/jsx-runtime"
-            ],
+            "external": ["react/jsx-runtime"],
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
             "assets": [
               {
@@ -112,20 +101,14 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "packages/react-rxjs/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["packages/react-rxjs/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/packages/react-rxjs"
-          ],
+          "outputs": ["coverage/packages/react-rxjs"],
           "options": {
             "jestConfig": "packages/react-rxjs/jest.config.js",
             "passWithNoTests": true
@@ -134,27 +117,8 @@
         "version": {
           "executor": "@jscutlery/semver:version"
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/react"
-  },
-  "generators": {
-    "@nrwl/react": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint",
-        "babel": true
       },
-      "component": {
-        "style": "scss"
-      },
-      "library": {
-        "style": "scss",
-        "linter": "eslint"
-      }
+      "tags": []
     }
-  },
-  "defaultProject": "playground"
+  }
 }

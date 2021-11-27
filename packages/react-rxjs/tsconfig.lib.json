@@ -3,14 +3,6 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc"
   },
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.spec.tsx"
-  ],
-  "include": [
-    "**/*.js",
-    "**/*.jsx",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx", "**/*.test.tsx"],
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }
