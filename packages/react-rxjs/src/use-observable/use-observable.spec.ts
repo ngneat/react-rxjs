@@ -1,7 +1,7 @@
 import { useObservable } from './use-observable';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { interval, BehaviorSubject, of } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize, map, filter } from 'rxjs/operators';
 
 jest.useFakeTimers();
 
@@ -75,4 +75,18 @@ describe('useObservable', () => {
         unmount();
         expect(spy).toHaveBeenCalled();
     })
+
+    it('should support a filter', () => {
+      const query = new BehaviorSubject('');
+      const query2 = query.asObservable().pipe(
+        filter(x => x !== '')
+      )
+
+      const { result } = renderHook(() => useObservable(query2));
+
+      act(() => query.next('2'));
+
+      const [next] = result.current;
+      expect(next).toBe('2');
+    });
 });

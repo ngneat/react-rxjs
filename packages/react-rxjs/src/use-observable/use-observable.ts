@@ -40,24 +40,10 @@ export function useObservable<T, E>(
         setComplete(true);
       },
     };
-    if (emitsInitialSyncValue) {
-      let firstEmission = true;
-      subscription.current = sourceRef$.current.subscribe({
-        next(v) {
-          if (!firstEmission) {
-            setValue(v);
-            return;
-          }
-          firstEmission = false;
-        },
-        ...base,
-      });
-    } else {
-      subscription.current = sourceRef$.current.subscribe({
-        next: setValue,
-        ...base,
-      });
-    }
+    subscription.current = sourceRef$.current.subscribe({
+      next: setValue,
+      ...base,
+    });
 
     return () => {
       if (!subscription.current?.closed) {
