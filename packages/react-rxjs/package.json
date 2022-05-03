@@ -1,6 +1,6 @@
 {
   "name": "@ngneat/react-rxjs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "React goodies for applications that uses RxJS",
   "repository": {
     "url": "https://github.com/ngneat/react-rxjs"
