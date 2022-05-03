@@ -1,71 +1,52 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Observable, Subscription } from 'rxjs';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, DependencyList, useMemo, useReducer } from 'react';
 
 export function useObservable<T, E>(
   source$: Observable<T>,
-  { initialValue }: { initialValue?: T | undefined } = {}
+  { deps = [], initialValue }: { deps?: DependencyList, initialValue?: T } = {}
 ): [T, { error: E | undefined, completed: boolean, subscription: Subscription | undefined }] {
-  const sourceRef$ = useRef<Observable<T>>(source$);
-  const subscription = useRef<Subscription | undefined>();
 
+  const sourceRef = useMemo(() => source$, deps);
+  const subscription = useRef(new Subscription());
+  const nextValue = useRef<T | undefined>(initialValue);
+  const [error, setError] = useState();
+  const [completed, setCompleted] = useState<boolean>(false);
   const emitsInitialSyncValue = initialValue === undefined;
+  const [_, forceUpdate] = useReducer(x => x + 1, 0);
 
-  const [error, setError] = useState<E | undefined>();
-  const [completed, setComplete] = useState<boolean>(false);
-
-  const [next, setValue] = useState<T>(() => {
+  useMemo(() => {
     if (emitsInitialSyncValue) {
-      let firstValue: T | undefined = undefined;
-
-      let subscription: Subscription | null = sourceRef$.current.subscribe(
-        (v) => {
-          firstValue = v;
-        }
-      );
+      let subscription: Subscription | null = sourceRef.subscribe(v => {
+        nextValue.current = v;
+      });
 
       subscription.unsubscribe();
       subscription = null;
-
-      return firstValue! as T;
     }
-
-    return initialValue!;
-  });
+  }, deps);
 
   useEffect(() => {
-    const base = {
-      error: setError,
-      complete() {
-        setComplete(true);
-      },
-    };
-    if (emitsInitialSyncValue) {
-      let firstEmission = true;
-      subscription.current = sourceRef$.current.subscribe({
-        next(v) {
-          if (!firstEmission) {
-            setValue(v);
-            return;
-          }
+    let firstEmission = true;
+
+    subscription.current = sourceRef.subscribe({
+      next(value) {
+        if (emitsInitialSyncValue && firstEmission) {
           firstEmission = false;
-        },
-        ...base,
-      });
-    } else {
-      subscription.current = sourceRef$.current.subscribe({
-        next: setValue,
-        ...base,
-      });
-    }
+        } else {
+          nextValue.current = value;
+          forceUpdate();
+        }
+      },
+      error: setError,
+      complete: setCompleted.bind(null, true)
+    })
 
     return () => {
-      if (!subscription.current?.closed) {
-        subscription.current?.unsubscribe();
-      }
-    };
+      subscription?.current.unsubscribe();
+    }
+  }, deps);
 
-  }, [emitsInitialSyncValue]);
 
-  return [next, { error, completed, subscription: subscription.current }];
+  return [nextValue.current!, { error, completed, subscription: subscription.current }];
 }

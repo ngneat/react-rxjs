@@ -41,6 +41,18 @@ function CounterComponent() {
 
 `useObservable` can take the initial value as the second parameter - `useObservable(source$, initialValue)`. If the source fires synchronously immediately (like in a `BehaviorSubject`), the value will be used as the initial value.
 
+You can also pass a dependencies:
+
+```tsx
+import { useObservable } from '@ngneat/react-rxjs';
+
+const SomeComponent = ({ id }: { id: string }) => {
+  const [state] = useObservable(getStream$(id), { deps: [id] })
+
+  return state;
+}
+```
+
 
 ## useUntilDestroyed
 

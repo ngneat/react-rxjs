@@ -8,7 +8,9 @@
     "lint": "nx run-many --target=lint --exclude=playground --all",
     "build": "nx build react-rxjs",
     "c": "git-cz",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "update": "nx migrate latest",
+    "migrate": "nx migrate --run-migrations"
   },
   "private": true,
   "devDependencies": {
@@ -67,3 +69,4 @@
     ]
   }
 }
+
